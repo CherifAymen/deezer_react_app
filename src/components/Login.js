@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import fire from '../config/Fire';
+import './Login.css';
 
 class Login extends Component {
   constructor(props) {
@@ -36,21 +37,33 @@ class Login extends Component {
   }
   render() {
     return (
-      <div className="col-md-6">
-        <form>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input  value={this.state.email} onChange={this.handleChange} type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input  value={this.state.password} onChange={this.handleChange} type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
-          </div>
-          <button type="submit" onClick={this.login} class="btn btn-primary">Login</button>
-          <button onClick={this.signup} style={{marginLeft: '25px'}} className="btn btn-success">Signup</button>
-        </form>
+      <div className="limiter">
+        <div className="container-login100">
+          <div className="wrap-login100">
 
+            <form className="login100-form validate-form">
+                  <h1 className="login100-form-title" style={{marginBottom: '150px'}}>
+                    Account Login
+                  </h1>
+                  <div className="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
+                    <input  value={this.state.email} onChange={this.handleChange} type="email" name="email" className="input100" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" />
+                    <span className="focus-input100"></span>
+                  </div>
+                  <div className="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
+                    <input  value={this.state.password} onChange={this.handleChange} type="password" name="password" className="input100" id="exampleInputPassword1" placeholder="Password" />
+                    <span className="focus-input100"></span>
+                  </div>
+                  <div className="container-login100-form-btn">
+                    <button type="submit" onClick={this.login} className="login100-form-btn">Login</button>
+                  </div>
+                  <div className="container-login100-form-btn">
+                    <button onClick={this.signup} style={{marginTop: '25px'}} className="login100-form-btn">Signup</button>
+                  </div>
+            </form>
+
+            <div className="login100-more toto"></div>
+          </div>
+        </div>
       </div>
     );
   }
