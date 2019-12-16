@@ -7,6 +7,7 @@ import Header from '../components/widgets/header/Header';
 import Footer from '../components/widgets/footer/Footer';
 import swal from 'sweetalert';
 
+
 class Home extends Component{
     state = {
         albums : [],

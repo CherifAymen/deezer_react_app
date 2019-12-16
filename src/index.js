@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {BrowserRouter} from 'react-router-dom';
 import Routes from './routes';
 
+
 const App = () =>{
     return(
         <BrowserRouter>
@@ -10,5 +11,6 @@ const App = () =>{
         </BrowserRouter>
     )
 }
+
 
 ReactDOM.render(<App/>,document.getElementById("root"));
