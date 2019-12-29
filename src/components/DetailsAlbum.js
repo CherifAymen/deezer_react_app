@@ -5,7 +5,7 @@ import * as actions from '../actions/index';
 import Header from '../components/widgets/header/Header';
 import Footer from '../components/widgets/footer/Footer';
 import ReactJkMusicPlayer from "react-jinke-music-player";
-import 'react-jinke-music-player/assets/index.css'
+import 'react-jinke-music-player/assets/index.css';
 
 class DetailsAlbum extends Component{
  

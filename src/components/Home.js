@@ -6,7 +6,8 @@ import {Link} from 'react-router-dom';
 import Header from '../components/widgets/header/Header';
 import Footer from '../components/widgets/footer/Footer';
 import swal from 'sweetalert';
-
+import ReactJkMusicPlayer from "react-jinke-music-player";
+import 'react-jinke-music-player/assets/index.css';
 
 class Home extends Component{
 
