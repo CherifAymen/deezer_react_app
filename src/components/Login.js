@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import fire from '../config/Fire';
 import './Login.css';
+import swal from 'sweetalert';
+
 
 class Login extends Component {
   constructor(props) {
@@ -23,7 +25,12 @@ class Login extends Component {
     e.preventDefault();
     fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
     }).catch((error) => {
-        console.log(error);
+      swal({
+          title: "Oops...",
+          text: "Email or Password incorrect",
+          icon: "error"
+      });
+      console.log(error);
       });
   }
 
@@ -32,6 +39,11 @@ class Login extends Component {
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
     }).then((u)=>{console.log(u)})
     .catch((error) => {
+      swal({
+          title: "Oops...",
+          text: "Email already in use",
+          icon: "error"
+      });
         console.log(error);
       })
   }
@@ -41,10 +53,9 @@ class Login extends Component {
         <div className="container-login100">
           <div className="wrap-login100">
 
-            <form className="login100-form validate-form">
-                  <h1 className="login100-form-title" style={{marginBottom: '150px'}}>
-                    Account Login
-                  </h1>
+            <form className="login100-form validate-form" style={{marginBottom: '80px'}}>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Deezer.svg/1200px-Deezer.svg.png" width="100%" style={{marginBottom: '100px'}} alt="logo"/>
+
                   <div className="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
                     <input  value={this.state.email} onChange={this.handleChange} type="email" name="email" className="input100" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" />
                     <span className="focus-input100"></span>

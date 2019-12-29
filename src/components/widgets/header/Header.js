@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import fire from '../../../config/Fire';
+import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+
+// Be sure to include styles at some point, probably during your bootstraping
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 class Header extends Component {
     constructor(props) {
@@ -15,23 +19,46 @@ class Header extends Component {
 
     render() {
         return (
-
-            <div className="navbar navbar-dark bg-danger mb-4">
-                <Link className="" to="/">Music App</Link>
-
-                <div className="" id="">
-                        <div className="nav-item active">
-                            <Link className="nav-link" to="/"><i className="fas fa-home"></i> Accueil <span className="sr-only">(current)</span></Link>
-                        </div>
-                        <div className="nav-item">
-                            <Link className="nav-link" to="/favorites"><i className="fas fa-star"></i> Favoris</Link>
-                        </div>
-                        <div className="nav-item">
-                              <button onClick={this.logout}>Logout</button>
-                        </div>
-
-                </div>
+            <div>
+              <SideNav
+                  className="bg-dark mx-4"
+                  onSelect={(selected) => {
+                      // Add your code here
+                  }}
+              >
+                  <SideNav.Toggle />
+                  <SideNav.Nav defaultSelected="home" >
+                      <NavItem eventKey="home">
+                          <NavIcon>
+                          <Link className="nav-link" to="/"><i className="fa fa-fw fa-home py-2" style={{ fontSize: '1.75em' }} /></Link>
+                          </NavIcon>
+                          <NavText>
+                          <Link className="nav-link" to="/">Accueil </Link>
+                          </NavText>
+                      </NavItem>
+                      <NavItem eventKey="charts" >
+                          <NavIcon>
+                          <Link className="nav-link" to="/favorites"><i className="fas fa-heart py-2" style={{ fontSize: '1.75em' }}></i> </Link>
+                          </NavIcon>
+                          <NavText>
+                          <Link className="nav-link" to="/favorites"> Favoris</Link>
+                          </NavText>
+                      </NavItem>
+                      <NavItem eventKey="logout">
+                          <NavIcon>
+                          <Link className="nav-link" ><i class="fas fa-sign-out-alt py-2" style={{ fontSize: '1.75em' }} onClick={this.logout}/></Link>
+                          </NavIcon>
+                          <NavText>
+                          <Link className="nav-link">
+                          <span onClick={this.logout}>Logout</span>
+                           </Link>
+                          </NavText>
+                      </NavItem>
+                  </SideNav.Nav>
+              </SideNav>
             </div>
+
+
         );
 
     }

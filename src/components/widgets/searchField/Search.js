@@ -18,10 +18,10 @@ class Search extends Component{
 
     render(){
         return(
-            <div className="search mb-2">
+            <div className="search mb-2 ml-4">
                 <form onSubmit={(event) => this.submitSearch(event)}>
                     <div className="row">
-                        <div className="col-md-10">
+                        <div className="col-md-11">
                             <div className="form-group">
                                 <input
                                     value={this.state.term}
@@ -31,9 +31,9 @@ class Search extends Component{
                                     placeholder="Recherche"/>
                             </div>
                         </div>
-                        <div className="col-md-2">
+                        <div className="col-md-1">
                             <div className="form-group">
-                                <button className="btn btn-danger"><i className="fas fa-search"></i></button>
+                                <button className="btn btn-light"><i className="fas fa-search"></i></button>
                             </div>
                         </div>
                     </div>

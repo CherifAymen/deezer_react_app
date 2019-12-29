@@ -9,17 +9,24 @@ import swal from 'sweetalert';
 
 
 class Home extends Component{
+
     state = {
         albums : [],
         term : '',
         show : false,
     }
+
     componentDidMount(){
         actions.getAlbums().then(item => this.setState({albums:item}));
     }
     searchAlbums = (term) => {
         actions.getAlbums(term).then(item => this.setState({albums:item}));
     }
+    toggleSideBar = event => {
+       // use our 'ref' to the sidebar component
+       // to open it
+       this.sidebar.toggle()
+   }
     addToFavorites = (album) => {
         //console.log(album.album.id);
         let oldFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -40,6 +47,19 @@ class Home extends Component{
             icon: "success",
         });
     }
+
+    renderFav = (album) => {
+        //console.log(album.album.id);
+        let oldFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        if(this.checkAlbum(oldFavorites,album)){
+
+            return <i className="fas fa-heart text-danger display-4 p-0 pt-4"></i> ;
+        }
+        else {
+          return <i className="fas fa-heart text-secondary display-4 p-0 pt-4"></i> ;
+        }
+    }
+
     checkAlbum = (albums,album) => {
         var found = albums.some(function (item) {
             return item.album.id === album.album.id;
@@ -51,37 +71,43 @@ class Home extends Component{
         const {albums} = this.state;
         return albums && albums.length ?
             albums.map((item,index) => (
-            <div  key={index} className="col-md-4 mb-2">
-                <div className="card border-danger">
-                    <img src={item.album.cover_big} className="card-img-top" alt=""/>
-                    <div className="card-body">
-                        <span className="text-primary">{item.artist.name} </span>
-                        <div className="card-title">
-                            {item.title}
-                        </div>
-                    </div>
-                    <div className="card-footer">
-                        <div className="links">
-                            <Link to={`/details/${item.album.id}`} className="link"><i className="fas fa-info text-danger"></i></Link>
-                            <a onClick={() => this.addToFavorites(item)} className="link"><i className="fas fa-star text-danger"></i></a>
-                        </div>
-                    </div>
+
+
+            <div key={index} className="card col-3 my-3 p-2">
+              <Link to={`/details/${item.album.id}`} className="link">
+              <img className="card-img-top" src={item.album.cover_big} alt="Card image cap" />
+              </Link>
+              <div className="d-flex flex-row">
+                <div className="card-body ">
+                  <h5 className=" display-4">{item.artist.name}</h5>
+                  <h4 className="card-title pt-2 text-secondary">{item.title}</h4>
                 </div>
+                <div className="card-body">
+                  <h3>
+                    <a onClick={() => this.addToFavorites(item)} className="link" style={{cursor: 'pointer'}}>{this.renderFav(item)}</a>
+                  </h3>
+                </div>
+              </div>
             </div>
         ))
         : null;
     }
     render(){
         return(
-            <div className="container">
-                <div className="row mt-4">
-                    <div className="col-md-10 mx-auto">
-                        <Header/>
+            <div className="row bg-light">
+
+            <div className="col-1" style={{position: 'sticky', top: '0', height: '100vh' ,width:'100px', zIndex:"333"}}>
+                <Header />
+              </div>
+
+                <div className="col-11 mt-4"  >
+                    <div className="">
                         <Search searchAlbums = {this.searchAlbums}/>
-                        <div className="row">
-                            {this.renderAlbums()}
-                        </div>
-                        <Footer/>
+                          	<div className="content mx-4 px-4">
+                              <div className="row">
+                                  {this.renderAlbums()}
+                                  </div>
+                            </div>
                     </div>
                 </div>
             </div>
